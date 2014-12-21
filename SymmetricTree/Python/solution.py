@@ -12,6 +12,8 @@ sys.path.insert(0, '/Users/CaseyMcGuire/Desktop/leetcode/Testing/Python')#mac
 from TreeNode import *
 import unittest
 
+#Solution runs in O(n) time (where n is the number of non-null nodes) and uses O(n) space (I think)
+
 # @param root, a tree node
 # @return a boolean
 def isSymmetric(root):
