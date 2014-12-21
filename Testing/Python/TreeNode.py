@@ -3,11 +3,11 @@ class BinaryTree:
     def __init__(self, list = None):
         self.root = None
         if list is not None:
-            self.create_tree_from_list(list)
+            self.__create_tree_from_list(list)
 
     
                         
-    def create_tree_from_list(self, list_of_nodes):
+    def __create_tree_from_list(self, list_of_nodes):
         '''
         Creates a BinaryTree from the list of nodes in level order.
         Note: you must specify *every* node on a given level, even if its nil.
@@ -19,7 +19,7 @@ class BinaryTree:
         #if the root is null, you can't reach the rest of the nodes
         if list_of_nodes[0] is not None:
             self.root = TreeNode(list_of_nodes[0])
-        else:
+        if list_of_nodes[0] is None or len(list_of_nodes) == 1:
             return
                 
         cur_level = []
