@@ -17,48 +17,55 @@ import unittest
 def isSymmetric(root):
     if root is None:
         return True
-    cur_right = []
-    cur_left = []
-    next_right = []
-    next_left = []
-    cur_right.append(root.right)
-    cur_left.append(root.left)
+
+    cur_right = {}
+    cur_left = {}
+    
+    next_right = {}
+
+    if root.right is None and root.left is None: 
+        return True
+    elif root.right is None and root.left is not None:
+        return False
+    elif root.right is not None and root.left is None:
+        return False
+   
+    cur_right[0] = root.right
+    cur_left[0] = root.left
     should_continue = True
+
     while should_continue:
         should_continue = False
-        for i in range(0, len(cur_right)):
-            
-            if cur_right[i] is None and cur_left[-i-1] is not None:
+        for key in cur_left.keys():
+            if key not in cur_right:
                 return False
-            elif cur_right[i] is not None and cur_left[-i-1] is None:
+            elif cur_right[key].val != cur_left[key].val:
                 return False
-            elif cur_right[i] is not None and cur_left[-i-1] is not None:
-                if cur_right[i].val != cur_left[-i-1].val:
-                    return False
             
-            if cur_right[i] is not None:
-                next_right.append(cur_right[i].left)
-                next_right.append(cur_right[i].right)
+            if cur_left[key].left is not None:
+                cur_left[2*key+1] = cur_left[key].left
                 should_continue = True
-            else:
-                for j in range(0, 2):
-                    next_right.append(None)
-                       
-            if cur_left[i] is not None:
-                next_left.append(cur_left[i].left)
-                next_left.append(cur_left[i].right)
+            if cur_left[key].right is not None:
+                cur_left[2*key + 2] = cur_left[key].right
                 should_continue = True
-            else:
-                for j in range(0, 2):
-                    next_left.append(None)
-
-        cur_right = next_right
-        cur_left = next_left
-        next_right = []
-        next_left = []
-    
-    return True
                 
+            if cur_right[key].left is not None:
+                next_right[2*key+2] = cur_right[key].left
+                should_continue = True
+            if cur_right[key].right is not None:
+                next_right[2*key+1] = cur_right[key].right
+                should_continue = True
+                
+            del cur_right[key]
+            del cur_left[key]
+
+        if len(cur_right.keys()) != 0:
+            return False
+        cur_right = next_right
+        next_right = {}
+        
+       
+    return True
 
 class TestSymmetricTree(unittest.TestCase):
     
@@ -72,18 +79,27 @@ class TestSymmetricTree(unittest.TestCase):
         ]
         self.failing_trees = [
             BinaryTree([1,2]).root,
+            BinaryTree([1,None,2]).root,
+            BinaryTree([1,2,3]).root,
             BinaryTree([1,2,2,None,3,None,3]).root,
-            BinaryTree([1,2,2,None,3,3,None,None,None,4,None,4]).root
+            BinaryTree([1,2,2,None,3,3,None,None,None,4,None,4]).root,
+            BinaryTree([2,3,3,4,None,5,4]).root
         ]
         
 
     def test_passing_symmetric_tree(self):
-        for tree in self.passing_trees:
-            self.assertTrue(isSymmetric(tree))
+        self.assertTrue(isSymmetric(self.passing_trees[0]))
+        self.assertTrue(isSymmetric(self.passing_trees[1]))
+        self.assertTrue(isSymmetric(self.passing_trees[2]))
+        self.assertTrue(isSymmetric(self.passing_trees[3]))
+        self.assertTrue(isSymmetric(self.passing_trees[4]))
+
 
     def test_failing_symmetric_tree(self):
         for tree in self.failing_trees:
             self.assertFalse(isSymmetric(tree))
 
 if __name__ == '__main__':
+    #dict = {1:1}
+    #print dict[2]
     unittest.main()
