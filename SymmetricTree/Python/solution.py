@@ -102,6 +102,5 @@ class TestSymmetricTree(unittest.TestCase):
             self.assertFalse(isSymmetric(tree))
 
 if __name__ == '__main__':
-    #dict = {1:1}
-    #print dict[2]
+    
     unittest.main()
