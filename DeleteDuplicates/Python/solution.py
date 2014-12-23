@@ -32,17 +32,23 @@ class TestDeleteDuplicates(unittest.TestCase):
         self.duplicate_lists = [
             LinkedList(),
             LinkedList([1]),
+            LinkedList([1,1]),
             LinkedList([1,2]),
             LinkedList([1,2,2]),
-            LinkedList([1,2,2,3])
+            LinkedList([1,2,2,3]),
+            LinkedList([1,2,2,3,3]),
+            LinkedList([1,1,2,2,3,3])
 
         ]
 
         self.deleted_lists = [
             LinkedList(),
             LinkedList([1]),
+            LinkedList([1]),
             LinkedList([1,2]),
             LinkedList([1,2]),
+            LinkedList([1,2,3]),
+            LinkedList([1,2,3]),
             LinkedList([1,2,3])
         ]
 
