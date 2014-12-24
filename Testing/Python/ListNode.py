@@ -71,6 +71,9 @@ class ListNode:
     def __str__(self):
         return '{self.val}'.format(self=self)
 
+    def __eq__(self, other):
+        return self.val == other.val
+
 if __name__ == '__main__':
     print "Here be dragons"
     

@@ -17,16 +17,32 @@ def removeNthFromEnd(head, n):
             should_delete_head = True
             break
         
-        while front is not None:
-            front = front.next
-            behind = behind.next
+    while front is not None:
+        front = front.next
+        behind = behind.next
         
-        if should_delete_head:
-            to_return = to_return.next
-        else:
-            behind.next = behind.next.next
-        return to_return
+    if should_delete_head:
+        to_return = to_return.next
+    else:
+        behind.next = behind.next.next
+    return to_return
 
 class TestRemoveNthFromEnd(unittest.TestCase):
     def setUp(self):
-        pass
+       self.lists = [
+           #[returned_head, remove_index, linked_list]
+           [None, 1, LinkedList([1]).head],
+           [ListNode(2), 2, LinkedList([1,2]).head]
+
+       ]
+
+    def test(self):
+        for i in self.lists:
+            # print LinkedList([1,2])
+            print "new head"
+            print removeNthFromEnd(i[2], i[1])
+            self.assertTrue(i[0] == removeNthFromEnd(i[2], i[1]))
+            
+
+if __name__ == '__main__':
+    unittest.main()
