@@ -34,7 +34,7 @@ class LinkedList:
             cur_node = cur_node.next
 
         list_str.append("None")
-        print list_str
+        #print list_str
         return ''.join(list_str)
 
     def __eq__(self, other_list):
