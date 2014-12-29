@@ -27,48 +27,49 @@ public class TreeNode{
 	}
 
 	TreeNode root = new TreeNode(array[0]);
-	Deque<TreeNode> oldStack = new ArrayDeque<>();
-	Deque<TreeNode> newStack = new ArrayDeque<>();
+	if(array.length == 1){
+	    return root;
+	}
+	Deque<TreeNode> oldStack = new LinkedList<>();
+	Deque<TreeNode> newStack = new LinkedList<>();
 	oldStack.push(root);
 
 	int i = 1;
 	while(true){
 	    TreeNode curNode = oldStack.pop();
-	    if(curNode == null) continue;
+	    System.out.println(curNode);
 	    
-	    TreeNode left;
-	    TreeNode right;
-	    
-	    //get our left node
-	    if(array[i] != null){
-		left = new TreeNode(array[i]);
-	    }else{
-		left = null;
+	    TreeNode left = null;
+	    TreeNode right= null;
+	    if(curNode != null){
+		//get our left node
+		if(array[i] != null){
+		    left = new TreeNode(array[i]);
+		}
+		
+		
+		//get our right node
+		if(i + 1 < array.length && array[i + 1] != null){
+		    right = new TreeNode(array[i + 1]);
+		}
+		
+		curNode.right = right;
+		curNode.left = left;
 	    }
-
-	    //break if this is our last node
-	    i++;
-	    if(i >= array.length) break;
-	   	    
-	    //get our right node
-	    if(array[i + 1] != null){
-		right = new TreeNode(array[i + 1]);
-	    }else{
-		right = null;
-	    }
+	    i += 2;
 	    
-
-	    curNode.right = right;
-	    curNode.left = left;
+	    //  System.out.println(left);
+	    //System.out.println(right);
+	    	   
 	    newStack.push(left);
 	    newStack.push(right);
-	    i++;
+	   
 
 	    if(i >= array.length) break;
 	    else if(oldStack.isEmpty()){
 		//if we're done with this level
 		oldStack = newStack;
-		newStack = new ArrayDeque<>();
+		newStack = new LinkedList<>();
 	    }
 	}
 
@@ -81,16 +82,59 @@ public class TreeNode{
 	
 	StringBuilder str = new StringBuilder();
 	
-	Deque<TreeNode> oldStack = new ArrayDeque<>();
-	Deque<TreeNode> newStack = new ArrayDeque<>();
-	
+	Deque<TreeNode> oldStack = new LinkedList<>();
+	Deque<TreeNode> newStack = new LinkedList<>();
+	oldStack.push(root);
+	str.append(root + "\n");
+	boolean shouldContinue = false;
+
+	while(true){
+	    TreeNode cur = oldStack.pop();
+
+	    TreeNode right = null;
+	    TreeNode left = null;
+
+	    if(cur == null){
+		str.append("##");
+	    }else{
+		
+		if(cur.left != null){
+		    str.append(cur.left.val);
+		    shouldContinue = true;
+		    left = cur.left;
+		}else{
+		    str.append("#");
+		}
+
+		//	System.out.println(cur.right);
+
+		if(cur.right != null){
+		    str.append(cur.right.val);
+		    shouldContinue = true;
+		    right = cur.right;
+		}else{
+		    str.append("#");
+		}
+	    }
+	    
+	    newStack.push(left);
+	    newStack.push(right);
+	    if(oldStack.isEmpty()){
+		if(!shouldContinue) break;
+		str.append("\n");
+		shouldContinue = false;
+		oldStack = newStack;
+		newStack = new LinkedList<>();
+	    }
+	}
 	
 	
 	return str.toString();
     }
 
     public static void main(String[] args){
-	System.out.println("Hello world");
+	TreeNode tree = createTreeFromArray(new Integer[]{1,2,3,4,5,6});
+	System.out.println(getTreeAsString(tree));
 	
     }
 
