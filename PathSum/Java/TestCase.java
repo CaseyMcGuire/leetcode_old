@@ -18,7 +18,7 @@ public class TestCase{
 	tree3 = TreeNode.createTreeFromArray(new Integer[]{1,2,3});
 	tree4 = TreeNode.createTreeFromArray(new Integer[]{-1,1});
 	tree5 = TreeNode.createTreeFromArray(new Integer[]{1,2,3,4,5,6,7});
-	
+	tree6 = TreeNode.createTreeFromArray(new Integer[]{1,2,3,3, null, null, 1, null, null, null, null, null, null, null, 1});
     }
 
     @Test
@@ -26,6 +26,7 @@ public class TestCase{
 	assertTrue(Solution.hasPathSum(tree1, 1));
 	assertFalse(Solution.hasPathSum(nullTree, 0));
 	assertTrue(Solution.hasPathSum(tree4, 0));
+
     }
 
     @Test
@@ -41,6 +42,8 @@ public class TestCase{
 	assertTrue(Solution.hasPathSum(tree5, 8));
 	assertTrue(Solution.hasPathSum(tree5, 10));
 	assertTrue(Solution.hasPathSum(tree5, 11));
+	assertTrue(Solution.hasPathSum(tree6, 6));
+	
     }
 
 }

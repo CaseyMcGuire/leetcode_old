@@ -37,7 +37,7 @@ public class TreeNode{
 	int i = 1;
 	while(true){
 	    TreeNode curNode = oldStack.pollLast();
-	    System.out.println(curNode);
+	    
 	    
 	    TreeNode left = null;
 	    TreeNode right= null;
