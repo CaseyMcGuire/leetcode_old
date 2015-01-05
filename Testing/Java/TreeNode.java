@@ -36,7 +36,7 @@ public class TreeNode{
 
 	int i = 1;
 	while(true){
-	    TreeNode curNode = oldStack.pop();
+	    TreeNode curNode = oldStack.pollLast();
 	    System.out.println(curNode);
 	    
 	    TreeNode left = null;
@@ -89,7 +89,7 @@ public class TreeNode{
 	boolean shouldContinue = false;
 
 	while(true){
-	    TreeNode cur = oldStack.pop();
+	    TreeNode cur = oldStack.pollLast();
 
 	    TreeNode right = null;
 	    TreeNode left = null;
