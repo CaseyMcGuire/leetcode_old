@@ -5,6 +5,7 @@
 struct ListNode* reverse(struct ListNode *node);
 struct ListNode* reverseList(struct ListNode *head);
 
+//Launcher function to reverse the list
 struct ListNode* reverseList(struct ListNode* head){
   if(head == NULL) return NULL;
   else if(head->next == NULL) return head;
@@ -16,6 +17,7 @@ struct ListNode* reverseList(struct ListNode* head){
   }
 }
 
+//Recurse down the list until you find the last node (which will become the new head)
 struct ListNode* reverse(struct ListNode* node){
 
   //we're in the last node
@@ -23,6 +25,7 @@ struct ListNode* reverse(struct ListNode* node){
     node->next->next = node;
     return node->next;
   }
+  //otherwise, continue recursing
   else{
     struct ListNode *new_head = reverse(node->next);
     node->next->next = node;
