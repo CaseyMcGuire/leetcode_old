@@ -68,8 +68,9 @@ int main(int argc, char *argv[]){
   run_test("Remove multiple heads test", input, expected_result, 1);
   free_list(input);
   print_list(expected_result);
+  printf("in\n");
   free_list(expected_result);
-  printf("out");
+  printf("out\n");
   
   int arr3[] = {1,2,3,4,5,6};
   printf("Here we are");
