@@ -19,7 +19,6 @@ struct ListNode* init_list(int values[], int length){
   int i;
   init_node(&iter);
   iter->val = values[0];
-  printf("%i\n",iter->val);
   head = iter;
     
   //initialize our nodes
@@ -35,6 +34,7 @@ struct ListNode* init_list(int values[], int length){
 void free_list(struct ListNode *head){
   struct ListNode *iter = head;
   while(iter != NULL){
+    printf("Memory is being freed\n");
     head = head->next;
     free(iter);
     iter = head;
@@ -52,6 +52,12 @@ void print_list(struct ListNode *head){
 }
 
 int lists_equal(struct ListNode *head1, struct ListNode *head2){
-  
-  return 0;
+
+  while(head1 != NULL && head2 != NULL){
+    if(head1->val != head2->val) return 0;
+    head1 = head1->next;
+    head2 = head2->next;
+  }
+  if(head1 != NULL || head2 != NULL) return 0;
+  else return 1;
 }
