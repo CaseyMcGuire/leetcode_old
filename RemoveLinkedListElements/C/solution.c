@@ -7,7 +7,7 @@ struct ListNode* removeElements(struct ListNode* head, int val){
 
   //if the head has the value, we have to find the new head node
   while(head != NULL && head->val == val){
-    //    free(head);
+    free(head);
     head = head->next;
   }
     
@@ -16,7 +16,7 @@ struct ListNode* removeElements(struct ListNode* head, int val){
   
   while(iter != NULL){
     if(iter->next != NULL && iter->next->val == val){
-      //      free(iter->next);
+      free(iter->next);
       iter->next = iter->next->next;
     }else{
       iter = iter->next;
@@ -68,12 +68,9 @@ int main(int argc, char *argv[]){
   run_test("Remove multiple heads test", input, expected_result, 1);
   free_list(input);
   print_list(expected_result);
-  printf("in\n");
   free_list(expected_result);
-  printf("out\n");
   
   int arr3[] = {1,2,3,4,5,6};
-  printf("Here we are");
   input = init_list(arr3, 6);
   int result_arr3[] = {1,2,3,4,5};
   expected_result = init_list(result_arr3, 5);

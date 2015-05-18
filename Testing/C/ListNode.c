@@ -26,8 +26,8 @@ struct ListNode* init_list(int values[], int length){
     init_node(&(iter->next));
     iter = iter->next;
     iter->val = values[i];
-
   }
+  iter->next = NULL;
   return head;
 }
 
