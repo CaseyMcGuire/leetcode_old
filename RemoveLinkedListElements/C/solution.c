@@ -7,8 +7,10 @@ struct ListNode* removeElements(struct ListNode* head, int val){
 
   //if the head has the value, we have to find the new head node
   while(head != NULL && head->val == val){
+    struct ListNode *temp = NULL;
+    if(head->next != NULL) temp = head->next;
     free(head);
-    head = head->next;
+    head = temp;
   }
     
   //create ListNode pointer that will iterate through the list
@@ -16,8 +18,9 @@ struct ListNode* removeElements(struct ListNode* head, int val){
   
   while(iter != NULL){
     if(iter->next != NULL && iter->next->val == val){
+      struct ListNode *temp = iter->next->next;
       free(iter->next);
-      iter->next = iter->next->next;
+      iter->next = temp;
     }else{
       iter = iter->next;
     } 
