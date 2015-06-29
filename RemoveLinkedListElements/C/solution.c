@@ -101,4 +101,6 @@ int main(int argc, char *argv[]){
   run_test("Remove element from middle of list", &input, expected_result, 4);
   free_list(input);
   free_list(expected_result);
+
+  return 0;
 }

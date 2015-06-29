@@ -34,7 +34,6 @@ struct ListNode* init_list(int values[], int length){
 void free_list(struct ListNode *head){
   struct ListNode *iter = head;
   while(iter != NULL){
-    printf("Memory is being freed\n");
     head = head->next;
     free(iter);
     iter = head;
