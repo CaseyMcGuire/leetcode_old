@@ -32,7 +32,8 @@ module BST
     def to_s
       str = ""
       queue = [[@root]]
-
+      
+      #First, a level order representation of our tree
       while true
         next_level = []
         queue[-1].each do |node|
@@ -46,6 +47,8 @@ module BST
         break if next_level.none?
         queue << next_level
       end
+
+      #Now, convert it to a string with a line break between each level
       queue.reduce("") do |acc, level|
         acc + "\n" + level.reduce("") {|memo, node| memo + node.to_s }
       end
@@ -76,6 +79,11 @@ module BST
       @val.to_s
     end
     
+  end
+
+
+  def build_bst(array)
+   BST::BinarySearchTree.new
   end
 end
 
