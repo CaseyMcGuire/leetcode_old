@@ -1,5 +1,9 @@
 module BST
   class BinarySearchTree
+
+    #Generally, not a good idea to allow access to root but needed for testing purposes
+    attr_accessor :root
+
     def initialize
       @root = nil
     end
@@ -25,8 +29,33 @@ module BST
     end
 
     def ==(other_tree)
-      #This is probably not wise but its fine for now
-      self.to_s == other_tree.to_s
+      cur_level = [self.root]
+      other_level = [other_tree.root]
+
+      while true
+        break if cur_level.all? {|node| node.nil? } && other_level.all? {|node| node.nil? }
+
+        next_cur_level = []
+        next_other_level = []
+
+        cur_level.zip(other_level).each do |cur_node, other_node|
+          if cur_node.nil? && !other_node.nil? ||
+              !cur_node.nil? and other_node.nil? ||
+              !cur_node.nil? && !other_node.nil? && cur_node.val != cur_node.val
+            return false
+          end
+
+          if cur_node.nil? && other_node.nil?
+            next_cur_level << cur_node.left
+            next_cur_level << cur_node.right
+            next_other_level << other_node.left
+            next_other_level << other_node.right
+          else
+            2.times {|i| next_cur_level << nil }
+            2.times {|i| next_other_level << nil }
+          end
+        end
+      true
     end
 
     def to_s
@@ -83,7 +112,8 @@ module BST
 
 
   def build_bst(array)
-   BST::BinarySearchTree.new
+    new_tree = BST::BinarySearchTree.new
+    
   end
 end
 
